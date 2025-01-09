@@ -158,7 +158,7 @@ const OnboardingCenterCredentialsStepper = () => {
 										cacCertificateInputRef.current?.click();
 									}}
 									loading={isPending}
-									disabled={isPending}
+									// disabled={isPending}
 									styles={{
 										root: {
 											color: 'black',
@@ -170,9 +170,13 @@ const OnboardingCenterCredentialsStepper = () => {
 										},
 									}}
 								>
-									{formValues.cacCertificateDocumentName
-										? 'Change document'
-										: 'Upload document'}
+									{isPending ? (
+										<Loader color='white' size={30} />
+									) :	 formValues.proofOfAddressDocumentName ? (
+										'Change document'
+									) : (
+										'Upload document'
+									)}
 								</Button>
 							</Flex>
 						</Stack>
@@ -244,7 +248,7 @@ const OnboardingCenterCredentialsStepper = () => {
 										proofOfAddressInputRef.current?.click();
 									}}
 									loading={isPending}
-									disabled={isPending}
+									// disabled={isPending}
 									styles={{
 										root: {
 											color: 'black',
@@ -256,9 +260,13 @@ const OnboardingCenterCredentialsStepper = () => {
 										},
 									}}
 								>
-									{formValues.proofOfAddressDocumentName
-										? 'Change document'
-										: 'Upload document'}
+									{isPending ? (
+										<Loader color='white' size={30} />
+									) :	 formValues.proofOfAddressDocumentName ? (
+										'Change document'
+									) : (
+										'Upload document'
+									)}
 								</Button>
 							</Flex>
 						</Stack>

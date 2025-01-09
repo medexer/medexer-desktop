@@ -1,8 +1,6 @@
 import {
-  ActionIcon,
   Box,
   Button,
-  CloseIcon,
   Container,
   Divider,
   Grid,

@@ -1,16 +1,18 @@
 import React from 'react';
 import {Box, Tabs} from '@mantine/core';
-import {useNavigate, useSearchParams} from 'react-router-dom';
 import PageShell from '../../shell/page-shell';
+import {useNavigate, useSearchParams} from 'react-router-dom';
+import OngoingAppointmentsTab from './tabs/ongoing-appointments-tab';
+import CompletedAppointmentsTab from './tabs/completed-appointments-tab';
 
-export default function AppointmentManagementPage() {
-	const [params] = useSearchParams();
+export default function AppointmentsPage() {
 	const navigate = useNavigate();
+	const [params] = useSearchParams();
 
 	return (
 		<React.Fragment>
 			<Tabs
-				defaultValue={params.get('tabId') ?? 'active'}
+				defaultValue={params.get('tabId') ?? 'ongoing-appointments'}
 				color='dark'
 				onChange={(value) => navigate(`?tabId=${value}`)}
 			>
@@ -20,10 +22,10 @@ export default function AppointmentManagementPage() {
 					tabs={
 						<Box bg='white'>
 							<Tabs.List px={'md'}>
-								<Tabs.Tab value='active'>
-									Active Appointments
+								<Tabs.Tab value='ongoing-appointments'>
+									Ongoing Appointments
 								</Tabs.Tab>
-								<Tabs.Tab value='history'>
+								<Tabs.Tab value='completed-appointments'>
 									Appointment History
 								</Tabs.Tab>
 							</Tabs.List>
@@ -31,13 +33,11 @@ export default function AppointmentManagementPage() {
 					}
 				>
 					<Box>
-						<Tabs.Panel value='active'>
-							{/* <ActiveOrders /> */}
-							<></>
+						<Tabs.Panel value='ongoing-appointments'>
+							<OngoingAppointmentsTab />
 						</Tabs.Panel>
-						<Tabs.Panel value='history'>
-							<></>
-							{/* <OrderHistory /> */}
+						<Tabs.Panel value='completed-appointments'>
+							<CompletedAppointmentsTab />
 						</Tabs.Panel>
 					</Box>
 				</PageShell>

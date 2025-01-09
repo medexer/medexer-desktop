@@ -1,9 +1,9 @@
-import {Paper, Image, Title, Text, Box, Flex, Button} from '@mantine/core';
 import {Time04Icon} from 'hugeicons-react';
 import {useAppContext} from '@/core/context';
 import {useContext, useState, useRef} from 'react';
 import {OnboardingContext} from '../onboarding-page';
-import OnboardingCompletedImage from '@/assets/images/image_onboarding_completed.jpg';
+import {Paper, Image, Title, Text, Box, Flex, Button} from '@mantine/core';
+import OnboardingCompletedImage from '../../../../assets/images/image_onboarding_completed.jpg';
 
 const OnboardingCompletedStepper = () => {
 	const {theme} = useAppContext();

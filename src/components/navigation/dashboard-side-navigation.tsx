@@ -1,94 +1,106 @@
 import {Box, Divider, Stack, Text} from '@mantine/core';
 import {
-	Invoice02Icon,
-	UserListIcon,
-	Store01Icon,
 	BloodPressureIcon,
 	StarCircleIcon,
 	Time04Icon,
 	Calendar03Icon,
-	Analytics01Icon,
-  CustomerService01Icon,
+	Analytics02Icon,
+	CustomerService01Icon,
+	AccountSetting01Icon,
 } from 'hugeicons-react';
-import React, {useEffect} from 'react';
-import {useAppContext} from '@/core/context';
 import DashboardNavigationLink from './dashboard-navigation-link';
+import {useDisclosure} from '@mantine/hooks';
+import SupportInquiryModal from '../modals/support/support-inquiry-modal';
 
-interface TUIDashboardSideNavigationProps {
+interface DashboardSideNavigationProps {
 	pendingOrderCount: number;
 }
 
-export default function TUIDashboardSideNavigation({
+export default function DashboardSideNavigation({
 	pendingOrderCount,
-}: TUIDashboardSideNavigationProps) {
-	const {donationCenterCredential} = useAppContext();
+}: DashboardSideNavigationProps) {
+	const [
+		openedSupportInquiryModal,
+		{open: openSupportInquiryModal, close: closeSupportInquiryModal},
+	] = useDisclosure(false);
 
 	return (
-		<Stack gap={0} h={'100%'}>
-			<Box>
-				{/* <VendorSwitcher /> */}
+		<>
+			<Stack gap={0} h={'100%'}>
+				<Box>
+					<Divider />
+				</Box>
+				<Stack p='md' gap={15} flex={1}>
+					<Text size='sm' c={'dimmed'} mb='sm'>
+						OPERATIONS
+					</Text>
+					<DashboardNavigationLink
+						Icon={Calendar03Icon}
+						label='Appointments'
+						path='/appointments'
+						rightIcon={
+							<Stack
+								//  bg={theme.colors.gray[2]}
+								bg='white'
+								w={25}
+								h={25}
+								align='center'
+								justify='center'
+								style={{
+									borderRadius: 50,
+									border: 'solid 1px #ECECEC',
+								}}
+							>
+								<Text>{pendingOrderCount}</Text>
+							</Stack>
+						}
+					/>
+					<DashboardNavigationLink
+						Icon={Analytics02Icon}
+						label='Dashboard'
+						path='/home'
+					/>
+					<DashboardNavigationLink
+						Icon={BloodPressureIcon}
+						label='Inventory'
+						path='/inventory'
+					/>
+					<DashboardNavigationLink
+						Icon={Time04Icon}
+						label='Availability'
+						path='/availability'
+					/>
+					<DashboardNavigationLink
+						Icon={StarCircleIcon}
+						label='Ratings & Reviews'
+						path='/ratings-review'
+					/>
+					<DashboardNavigationLink
+						Icon={AccountSetting01Icon}
+						label='Settings'
+						path='/settings'
+					/>
+				</Stack>
 				<Divider />
-			</Box>
-			<Stack p='md' gap={15} flex={1}>
-				<Text size='sm' c={'dimmed'} mb='sm'>
-					OPERATIONS
-				</Text>
-				<DashboardNavigationLink
-					Icon={Calendar03Icon}
-					label='Appointments'
-					path='/appointments'
-					rightIcon={
-						<Stack
-							//  bg={theme.colors.gray[2]}
-							bg='white'
-							w={25}
-							h={25}
-							align='center'
-							justify='center'
-							style={{
-								borderRadius: 50,
-								border: 'solid 1px #ECECEC',
-							}}
-						>
-							<Text>{pendingOrderCount}</Text>
-						</Stack>
-					}
-				/>
-				<DashboardNavigationLink
-					Icon={Analytics01Icon}
-					label='Dashboard'
-					path='/home'
-				/>
-				<DashboardNavigationLink
-					Icon={BloodPressureIcon}
-					label='Inventory'
-					path='/inventory'
-				/>
-				<DashboardNavigationLink
-					Icon={Time04Icon}
-					label='Availability'
-					path='/availability'
-				/>
-				<DashboardNavigationLink
-					Icon={StarCircleIcon}
-					label='Ratings & Reviews'
-					path='/reviews'
-				/>
+				<Box
+					p='md'
+					py='xs'
+					onClick={() => {
+						openSupportInquiryModal();
+					}}
+				>
+					<DashboardNavigationLink
+						Icon={CustomerService01Icon}
+						label='Customer support'
+						path='#'
+					/>
+				</Box>
 			</Stack>
-			<Divider />
-			<Box
-				p='md'
-				py='xs'
-				onClick={() => {
-					// openModal(<CustomerSupportForm onClose={() => {}} />, 'Having issues?');
-				}}
-			>
-				<DashboardNavigationLink
-					Icon={CustomerService01Icon}
-					label='Customer support'
-					path='#'
-				/>
-			</Box>
-		</Stack>
+			
+			<SupportInquiryModal
+				opened={openedSupportInquiryModal}
+				onClose={closeSupportInquiryModal}
+			/>
+		</>
 	);
 }

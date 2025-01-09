@@ -1,4 +1,5 @@
 import {Box, Container, Text, Title} from '@mantine/core';
+import AuthImage01 from '../../assets/images/image_auth_1.jpg';
 
 const LeftAuthPanel = () => {
 	return (
@@ -6,7 +7,7 @@ const LeftAuthPanel = () => {
 			<Box
 				style={{
 					height: '100%',
-					backgroundImage: 'url(/src/assets/images/image_auth_1.jpg)',
+					backgroundImage: `url(${AuthImage01})`,
 					backgroundSize: 'cover',
 					backgroundPosition: 'center',
 					backgroundRepeat: 'no-repeat',

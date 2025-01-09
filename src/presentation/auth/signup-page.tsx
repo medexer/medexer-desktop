@@ -141,8 +141,8 @@ export default function SigupPage() {
 							/>
 
 							<PhoneNumberInput
-								value={form.values.phone}
-								onChange={(value) =>
+								value={form.getValues().phone}
+								onChangeHandler={(value) =>
 									form.setFieldValue('phone', value)
 								}
 								countryCode={formValues.countryCode}
@@ -208,16 +208,12 @@ export default function SigupPage() {
 
 							<Text size='sm' c='dimmed' ta='center'>
 								By continuing, you automatically accept our{' '}
-								<Anchor href='#' underline='always'>
+								<Anchor target='_blank' href='https://medexer.com.ng/terms-of-service' underline='always'>
 									Terms & Conditions
 								</Anchor>
 								,{' '}
-								<Anchor href='#' underline='always'>
+								<Anchor target='_blank' href='https://medexer.com.ng/privacy-policy' underline='always'>
 									Privacy Policy
-								</Anchor>{' '}
-								and{' '}
-								<Anchor href='#' underline='always'>
-									cookies policy
 								</Anchor>
 							</Text>
 						</Stack>

@@ -1,11 +1,10 @@
+import { useAppContext } from '../context';
 import useGetUserProfileQuery from './profile/useGetUserProfileQuery';
 
 export default function useLoggedInUser() {
 	const {data, status, refetch} = useGetUserProfileQuery();
 
 	return {
-		...data?.data,
-		profile: data?.data,
 		status,
 		reload: () => {
 			refetch();

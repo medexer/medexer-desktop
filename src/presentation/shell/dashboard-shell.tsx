@@ -1,10 +1,13 @@
 import {AppOutlet} from '../root/app-outlet';
 import {AppShell, useMantineTheme} from '@mantine/core';
 import DashboardShellHeader from '@/components/navigation/dashboard-shell-header';
-import TUIDashboardSideNavigation from '@/components/navigation/dashboard-side-navigation';
+import DashboardSideNavigation from '@/components/navigation/dashboard-side-navigation';
+import useGetOngoingAppointmentsQuery from '@/core/hooks/appointments/useGetOngoingAppointmentsQuery';
 
 export default function DashboardShell() {
 	const theme = useMantineTheme();
+
+	const {data: pendingAppointments} = useGetOngoingAppointmentsQuery();
 
 	return (
 		<AppShell
@@ -14,7 +17,7 @@ export default function DashboardShell() {
 		>
 			<DashboardShellHeader />
 			<AppShell.Navbar>
-				<TUIDashboardSideNavigation pendingOrderCount={0} />
+				<DashboardSideNavigation pendingOrderCount={pendingAppointments?.length!} />
 			</AppShell.Navbar>
 			<AppShell.Main bg={theme.colors.gray[0]}>
 				<AppOutlet />

@@ -3,13 +3,13 @@ import {Flex, Select, Text, TextInput} from '@mantine/core';
 
 const PhoneNumberInput = ({
 	value,
-	onChange,
 	countryCode,
+	onChangeHandler,
 	onCountryCodeChange,
 }: {
 	value: string;
-	onChange: (value: string) => void;
 	countryCode: string;
+	onChangeHandler: (value: string) => void;
 	onCountryCodeChange: (code: string) => void;
 }) => {
 	return (
@@ -30,7 +30,6 @@ const PhoneNumberInput = ({
 					onChange={(value) =>
 						onCountryCodeChange(value?.split('_')[0] || '+234')
 					}
-					
 					allowDeselect={false}
 					styles={{
 						input: {
@@ -53,7 +52,13 @@ const PhoneNumberInput = ({
 					maxLength={countryCode === '+234' ? 10 : undefined}
 					placeholder='enter phone number'
 					value={value}
-					onChange={(e) => onChange(e.currentTarget.value)}
+					inputMode='numeric'
+					onChange={(event) => {
+						const numericValue = event.currentTarget.value.replace(/[^0-9]/g, '');
+
+						onChangeHandler(numericValue);
+					}}
+					type='tel'
 				/>
 			</Flex>
 		</Flex>

@@ -9,20 +9,19 @@ export default function useDonationCenterProfileInitHook() {
 
 	const {mutate} = useDonationCenterProfileMutation();
 
-	const {setDonationCenterCredential, donationCenterCredential} =
-		useAppContext();
+	const {setDonationCenterProfile, donationCenterProfile} = useAppContext();
 
 	async function init() {
 		// if (
-		// 	donationCenterCredential &&
-		// 	donationCenterCredential.isComplianceUploaded
+		// 	donationCenterProfile &&
+		// 	donationCenterProfile.isComplianceUploaded
 		// ) {
 		// 	return;
 		// }
 
 		mutate(undefined, {
 			onSuccess(data: DonationCenterInfo) {
-				setDonationCenterCredential(data);
+				setDonationCenterProfile(data);
 
 				if (data.isComplianceUploaded && data.isComplianceApproved) {
 					navigate('/appointments');

@@ -1,53 +1,47 @@
-import { app, BrowserWindow } from "electron";
-import { fileURLToPath } from "node:url";
-import path from "node:path";
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-process.env.APP_ROOT = path.join(__dirname, "..");
-const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
-const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
-const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
-process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, "public") : RENDERER_DIST;
-let win;
-function createWindow() {
-  win = new BrowserWindow({
+import { app as i, BrowserWindow as r } from "electron";
+import { fileURLToPath as l } from "node:url";
+import e from "node:path";
+const n = e.dirname(l(import.meta.url));
+process.env.APP_ROOT = e.join(n, "..");
+const s = process.env.VITE_DEV_SERVER_URL, m = e.join(process.env.APP_ROOT, "dist-electron"), t = e.join(process.env.APP_ROOT, "dist");
+process.env.VITE_PUBLIC = s ? e.join(process.env.APP_ROOT, "public") : t;
+let o;
+function c() {
+  o = new r({
     width: 1200,
     height: 800,
-    icon: path.join(
-      __dirname,
+    icon: e.join(
+      n,
       "..",
       "public",
       process.platform === "win32" ? "medexer-logo.ico" : process.platform === "darwin" ? "medexer-logo.icns" : "medexer-logo.png"
     ),
     webPreferences: {
-      preload: path.join(__dirname, "preload.mjs")
+      preload: e.join(n, "preload.mjs")
+      // devTools: false,
+    },
+    ...process.platform === "darwin" && {
+      dockOptions: {
+        icon: e.join(n, "..", "public", "medexer-logo.icns"),
+        iconSize: 32
+      }
     }
-  });
-  win.webContents.on("did-finish-load", () => {
-    win == null ? void 0 : win.webContents.send(
+  }), o.webContents.on("did-finish-load", () => {
+    o == null || o.webContents.send(
       "main-process-message",
       (/* @__PURE__ */ new Date()).toLocaleString()
     );
-  });
-  if (VITE_DEV_SERVER_URL) {
-    win.loadURL(VITE_DEV_SERVER_URL);
-  } else {
-    win.loadFile(path.join(RENDERER_DIST, "index.html"));
-  }
+  }), s ? o.loadURL(s) : o.loadFile(e.join(t, "index.html"));
 }
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-    win = null;
-  }
+i.on("window-all-closed", () => {
+  process.platform !== "darwin" && (i.quit(), o = null);
 });
-app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
+i.on("activate", () => {
+  r.getAllWindows().length === 0 && c();
 });
-app.whenReady().then(createWindow);
+i.whenReady().then(c);
 export {
-  MAIN_DIST,
-  RENDERER_DIST,
-  VITE_DEV_SERVER_URL
+  m as MAIN_DIST,
+  t as RENDERER_DIST,
+  s as VITE_DEV_SERVER_URL
 };

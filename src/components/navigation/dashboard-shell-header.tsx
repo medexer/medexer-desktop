@@ -7,32 +7,34 @@ import {
 	Container,
 	Divider,
 	Drawer,
+	Flex,
 	Group,
+	Indicator,
 	Menu,
 	Stack,
 	Text,
 } from '@mantine/core';
-import {useNavigate} from 'react-router-dom';
-import {useDisclosure} from '@mantine/hooks';
-import useLoggedInUser from '@/core/hooks/useLoggedInUser';
-import DashboardLogoSvg from '@/assets/icons/icon_dashboard.png';
-// import LogoTextOnlyPrimary from '@/ui/assets/LogoTextOnlyPrimary.svg';
-import TUIDashboardSideNavigation from './dashboard-side-navigation';
 import {
 	Logout01Icon,
 	Menu01Icon,
-	Settings01Icon,
+	AccountSetting01Icon,
 	UserIcon,
+	Notification01Icon,
 } from 'hugeicons-react';
+import {useNavigate} from 'react-router-dom';
+import {useDisclosure} from '@mantine/hooks';
 import {useAppContext} from '@/core/context';
+import useLoggedInUser from '@/core/hooks/useLoggedInUser';
+import DashboardLogoSvg from '@/assets/icons/icon_dashboard.png';
+import DashboardSideNavigation from './dashboard-side-navigation';
 
 export default function DashboardShellHeader() {
-	const {firstName, lastName, profile, logout} = useLoggedInUser();
-	const {donationCenterCredential} = useAppContext();
+	const {logout} = useLoggedInUser();
+
+	const {profile, donationCenterProfile} = useAppContext();
 
 	const navigate = useNavigate();
 
-	const firstLetter = firstName ? firstName.charAt(0).toUpperCase() : '';
 	return (
 		<AppShell.Header>
 			<Container size={'xl'} py='xs' fluid h={'100%'}>
@@ -47,7 +49,36 @@ export default function DashboardShellHeader() {
 								{/* <img src={LogoTextOnlyPrimary} height={30} /> */}
 							</Group>
 						</Box>
-						<Box>
+						<Flex align='center' gap={'xl'}>
+							{/* <Menu>
+								<Menu.Target>
+									<Indicator
+										inline
+										size={16}
+										offset={2}
+										color='red'
+										withBorder
+										processing
+										position='top-end'
+									>
+										<Notification01Icon
+											size={24}
+											style={{cursor: 'pointer'}}
+										/>
+									</Indicator>
+								</Menu.Target>
+
+								<Menu.Dropdown
+									w={'25%'}
+									style={{boxShadow: '0px 0px 10px 0px #00000020'}}
+								>
+									<Menu.Label>Notifications</Menu.Label>
+									<Menu.Item>
+										Settings
+									</Menu.Item>
+								</Menu.Dropdown>
+							</Menu> */}
+
 							<Menu>
 								<Menu.Target>
 									<Group
@@ -60,12 +91,17 @@ export default function DashboardShellHeader() {
 											variant='filled'
 											src={profile?.profilePhoto}
 										>
-											{firstLetter}
+											{profile?.firstName
+												? profile?.firstName
+														.charAt(0)
+														.toUpperCase()
+												: ''}
 										</Avatar>
 
 										<Box visibleFrom='sm'>
 											<Text>
-												{firstName} {lastName}
+												{profile?.firstName}{' '}
+												{profile?.lastName}
 											</Text>
 										</Box>
 									</Group>
@@ -74,7 +110,8 @@ export default function DashboardShellHeader() {
 									<Group gap={'sm'} px='xs' align='center'>
 										<Box>
 											<Text size='sm'>
-												{firstName} {lastName}
+												{profile?.firstName}{' '}
+												{profile?.lastName}
 											</Text>
 											<Text
 												size='xs'
@@ -89,33 +126,47 @@ export default function DashboardShellHeader() {
 									<Menu.Item
 										leftSection={<UserIcon size={18} />}
 										onClick={() => {
-											navigate('/account');
+											if (
+												!donationCenterProfile?.isComplianceApproved
+											) {
+												return;
+											}
+
+											navigate(
+												'/settings?tabId=account-settings'
+											);
 										}}
 									>
 										Profile
 									</Menu.Item>
 									<Menu.Item
 										leftSection={
-											<Settings01Icon size={18} />
+											<AccountSetting01Icon size={18} />
 										}
 										onClick={() => {
+											if (
+												!donationCenterProfile?.isComplianceApproved
+											) {
+												return;
+											}
+
 											navigate(
-												'/account/settings?page_id=settings'
+												'/settings?tabId=business-settings'
 											);
 										}}
 									>
 										Settings
 									</Menu.Item>
 									<Menu.Item
-										leftSection={<Logout01Icon size={18} />}
 										color='red'
 										onClick={logout}
+										leftSection={<Logout01Icon size={18} />}
 									>
 										Log Out
 									</Menu.Item>
 								</Menu.Dropdown>
 							</Menu>
-						</Box>
+						</Flex>
 					</Group>
 				</Stack>
 			</Container>
@@ -139,17 +190,17 @@ export function MobileNavigationDrawer() {
 			>
 				<Group p={'sm'}>
 					<ActionIcon
-						variant='subtle'
-						color='dark'
 						size={'lg'}
+						color='dark'
 						onClick={close}
+						variant='subtle'
 					>
 						<CloseIcon />
 					</ActionIcon>
 					{/* <img src={LogoTextOnlyPrimary} height={30} /> */}
 				</Group>
 				<Divider />
-				<TUIDashboardSideNavigation pendingOrderCount={0} />{' '}
+				<DashboardSideNavigation pendingOrderCount={0} />{' '}
 			</Drawer>
 			<ActionIcon variant='default' size={'lg'} onClick={open}>
 				<Menu01Icon />

@@ -26,6 +26,587 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerM
 /**
  * 
  * @export
+ * @interface AccountInfo
+ */
+export interface AccountInfo {
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'firstName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'lastName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'phone': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'state': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'stateArea': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'latitude': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'longitude': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'profilePhoto': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'accountType': AccountInfoAccountTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'status': AccountInfoStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'fcmToken': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'referralCode': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'referredBy': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'lastLogin': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'lastDonationDate': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountInfo
+     */
+    'inRecovery': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'bloodGroup': AccountInfoBloodGroupEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountInfo
+     */
+    'genotype': AccountInfoGenotypeEnum;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountInfo
+     */
+    'hasTattoos': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountInfo
+     */
+    'isComplianceUploaded': boolean;
+}
+
+export const AccountInfoAccountTypeEnum = {
+    DonationCenter: 'donation_center',
+    Individual: 'individual',
+    Admin: 'admin',
+    SuperAdmin: 'super_admin',
+    System: 'system'
+} as const;
+
+export type AccountInfoAccountTypeEnum = typeof AccountInfoAccountTypeEnum[keyof typeof AccountInfoAccountTypeEnum];
+export const AccountInfoStatusEnum = {
+    Pending: 'pending',
+    Active: 'active',
+    Inactive: 'inactive',
+    ShadowBanned: 'shadow_banned',
+    Disabled: 'disabled'
+} as const;
+
+export type AccountInfoStatusEnum = typeof AccountInfoStatusEnum[keyof typeof AccountInfoStatusEnum];
+export const AccountInfoBloodGroupEnum = {
+    A: 'A+',
+    A2: 'A-',
+    B: 'B+',
+    B2: 'B-',
+    Ab: 'AB+',
+    Ab2: 'AB-',
+    O: 'O+',
+    O2: 'O-'
+} as const;
+
+export type AccountInfoBloodGroupEnum = typeof AccountInfoBloodGroupEnum[keyof typeof AccountInfoBloodGroupEnum];
+export const AccountInfoGenotypeEnum = {
+    Aa: 'AA',
+    As: 'AS',
+    Ss: 'SS',
+    Ac: 'AC',
+    Sc: 'SC'
+} as const;
+
+export type AccountInfoGenotypeEnum = typeof AccountInfoGenotypeEnum[keyof typeof AccountInfoGenotypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface AddDispenseBloodInventoryItemDTO
+ */
+export interface AddDispenseBloodInventoryItemDTO {
+    /**
+     * Whether to add or dispense inventory item
+     * @type {boolean}
+     * @memberof AddDispenseBloodInventoryItemDTO
+     */
+    'isAddInventory': boolean;
+    /**
+     * Quantity of the inventory item
+     * @type {number}
+     * @memberof AddDispenseBloodInventoryItemDTO
+     */
+    'quantity': number;
+    /**
+     * Inventory item ID
+     * @type {string}
+     * @memberof AddDispenseBloodInventoryItemDTO
+     */
+    'inventoryItemId': string;
+    /**
+     * Donation center ID
+     * @type {string}
+     * @memberof AddDispenseBloodInventoryItemDTO
+     */
+    'donationCenterId': string;
+}
+/**
+ * 
+ * @export
+ * @interface BloodInventoryInfo
+ */
+export interface BloodInventoryInfo {
+    /**
+     * 
+     * @type {string}
+     * @memberof BloodInventoryInfo
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BloodInventoryInfo
+     */
+    'bloodGroup': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BloodInventoryInfo
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BloodInventoryInfo
+     */
+    'units': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BloodInventoryInfo
+     */
+    'price': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BloodInventoryInfo
+     */
+    'createdAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface DashboardAnalyticsDataPoint
+ */
+export interface DashboardAnalyticsDataPoint {
+    /**
+     * The month of the analytics data point.
+     * @type {string}
+     * @memberof DashboardAnalyticsDataPoint
+     */
+    'month': string;
+    /**
+     * The value of the analytics data point.
+     * @type {number}
+     * @memberof DashboardAnalyticsDataPoint
+     */
+    'value': number;
+}
+/**
+ * 
+ * @export
+ * @interface DashboardFulfillmentRate
+ */
+export interface DashboardFulfillmentRate {
+    /**
+     * The percentage of fulfilled orders in the current period.
+     * @type {string}
+     * @memberof DashboardFulfillmentRate
+     */
+    'currentRate': string;
+    /**
+     * The number of completed appointments in the current period.
+     * @type {number}
+     * @memberof DashboardFulfillmentRate
+     */
+    'completedAppointments': number;
+    /**
+     * The number of cancelled appointments in the current period.
+     * @type {number}
+     * @memberof DashboardFulfillmentRate
+     */
+    'cancelledAppointments': number;
+    /**
+     * The number of rejected appointments in the current period.
+     * @type {number}
+     * @memberof DashboardFulfillmentRate
+     */
+    'rejectedAppointments': number;
+}
+/**
+ * 
+ * @export
+ * @interface DashboardInfo
+ */
+export interface DashboardInfo {
+    /**
+     * The period covered by the report, formatted as \"1st MMM YYYY - Do MMM YYYY\".
+     * @type {string}
+     * @memberof DashboardInfo
+     */
+    'period': string;
+    /**
+     * Summary statistics for the current period.
+     * @type {DashboardSummary}
+     * @memberof DashboardInfo
+     */
+    'summary': DashboardSummary;
+    /**
+     * The total number of active appointments in the current period.
+     * @type {Array<DonationCenterAppointmentInfo>}
+     * @memberof DashboardInfo
+     */
+    'activeAppointments': Array<DonationCenterAppointmentInfo>;
+    /**
+     * The analytics data for the current period.
+     * @type {Array<DashboardAnalyticsDataPoint>}
+     * @memberof DashboardInfo
+     */
+    'analytics': Array<DashboardAnalyticsDataPoint>;
+    /**
+     * Inventory summary for the donation center.
+     * @type {DashboardInventoryData}
+     * @memberof DashboardInfo
+     */
+    'inventory': DashboardInventoryData;
+    /**
+     * Fulfillment rate for the donation center appointments.
+     * @type {DashboardFulfillmentRate}
+     * @memberof DashboardInfo
+     */
+    'fulfillmentRate': DashboardFulfillmentRate;
+}
+/**
+ * 
+ * @export
+ * @interface DashboardInventoryData
+ */
+export interface DashboardInventoryData {
+    /**
+     * The number of items currently in stock.
+     * @type {number}
+     * @memberof DashboardInventoryData
+     */
+    'itemsInStock': number;
+    /**
+     * The number of items currently out of stock.
+     * @type {number}
+     * @memberof DashboardInventoryData
+     */
+    'itemsOutOfStock': number;
+    /**
+     * The number of items.
+     * @type {number}
+     * @memberof DashboardInventoryData
+     */
+    'totalItems': number;
+}
+/**
+ * 
+ * @export
+ * @interface DashboardSummary
+ */
+export interface DashboardSummary {
+    /**
+     * The total number of completed appointments in the current period.
+     * @type {number}
+     * @memberof DashboardSummary
+     */
+    'appointments': number;
+    /**
+     * The percentage change in the number of appointments compared to the previous period.
+     * @type {string}
+     * @memberof DashboardSummary
+     */
+    'appointmentsChange': string;
+    /**
+     * The total number of appointments in the previous period.
+     * @type {number}
+     * @memberof DashboardSummary
+     */
+    'previousMonthAppointments': number;
+    /**
+     * The total pints amount in the current period, formatted to 2 decimal places.
+     * @type {number}
+     * @memberof DashboardSummary
+     */
+    'pints': number;
+    /**
+     * The percentage change in pints compared to the previous period, formatted as a string with \"%\" sign.
+     * @type {string}
+     * @memberof DashboardSummary
+     */
+    'pintsChange': string;
+    /**
+     * The total pints amount in the previous period, formatted to 2 decimal places.
+     * @type {number}
+     * @memberof DashboardSummary
+     */
+    'previousMonthPints': number;
+    /**
+     * The total appointments cancelled in the current period, formatted to 2 decimal places.
+     * @type {number}
+     * @memberof DashboardSummary
+     */
+    'appointmentsCancelled': number;
+    /**
+     * The percentage change in appointments cancelled compared to the previous period, formatted as a string with \"%\" sign.
+     * @type {string}
+     * @memberof DashboardSummary
+     */
+    'appointmentsCancelledChange': string;
+    /**
+     * The total appointments cancelled in the previous period, formatted to 2 decimal places.
+     * @type {number}
+     * @memberof DashboardSummary
+     */
+    'previousMonthAppointmentsCancelled': number;
+    /**
+     * The total donors reached in the current period, formatted to 2 decimal places.
+     * @type {number}
+     * @memberof DashboardSummary
+     */
+    'donorsReached': number;
+    /**
+     * The percentage change in donors reached compared to the previous period, formatted as a string with \"%\" sign.
+     * @type {string}
+     * @memberof DashboardSummary
+     */
+    'donorsReachedChange': string;
+    /**
+     * The total donors reached in the previous period, formatted to 2 decimal places.
+     * @type {number}
+     * @memberof DashboardSummary
+     */
+    'previousMonthDonorsReached': number;
+}
+/**
+ * 
+ * @export
+ * @interface DonationCenterAppointmentInfo
+ */
+export interface DonationCenterAppointmentInfo {
+    /**
+     * 
+     * @type {string}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'appointmentId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'time': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'date': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'status': DonationCenterAppointmentInfoStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'verificationCode': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'donorName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'donorProfilePhoto': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'donorPhone': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'donorEmail': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'rejectedAt': object;
+    /**
+     * 
+     * @type {object}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'cancelledAt': object;
+    /**
+     * 
+     * @type {object}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'acceptedAt': object;
+    /**
+     * 
+     * @type {object}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'processingAt': object;
+    /**
+     * 
+     * @type {object}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'testResultsUploadedAt': object;
+    /**
+     * 
+     * @type {object}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'completedAt': object;
+    /**
+     * 
+     * @type {string}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DonationCenterAppointmentInfo
+     */
+    'updatedAt': string;
+}
+
+export const DonationCenterAppointmentInfoStatusEnum = {
+    Pending: 'pending',
+    Accepted: 'accepted',
+    Processing: 'processing',
+    Completed: 'completed',
+    Cancelled: 'cancelled',
+    Missed: 'missed',
+    NoShow: 'no_show',
+    Rejected: 'rejected',
+    Expired: 'expired'
+} as const;
+
+export type DonationCenterAppointmentInfoStatusEnum = typeof DonationCenterAppointmentInfoStatusEnum[keyof typeof DonationCenterAppointmentInfoStatusEnum];
+
+/**
+ * 
+ * @export
  * @interface DonationCenterComplianceAddressDTO
  */
 export interface DonationCenterComplianceAddressDTO {
@@ -393,11 +974,225 @@ export interface DonationCenterInfo {
      */
     'verificationDeclineReason'?: string;
     /**
+     * Rating one e.g 4
+     * @type {string}
+     * @memberof DonationCenterInfo
+     */
+    'ratingOne'?: string;
+    /**
+     * Rating two e.g 56
+     * @type {string}
+     * @memberof DonationCenterInfo
+     */
+    'ratingTwo'?: string;
+    /**
+     * Rating three e.g 78
+     * @type {string}
+     * @memberof DonationCenterInfo
+     */
+    'ratingThree'?: string;
+    /**
+     * Rating four e.g 90
+     * @type {string}
+     * @memberof DonationCenterInfo
+     */
+    'ratingFour'?: string;
+    /**
+     * Rating five e.g 100
+     * @type {string}
+     * @memberof DonationCenterInfo
+     */
+    'ratingFive'?: string;
+    /**
      * Average rating e.g 4.5
      * @type {string}
      * @memberof DonationCenterInfo
      */
     'averageRating'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface DonationCenterOperationsInfo
+ */
+export interface DonationCenterOperationsInfo {
+    /**
+     * Days of work
+     * @type {Array<DonationCentreDaysOfWork>}
+     * @memberof DonationCenterOperationsInfo
+     */
+    'daysOfWork'?: Array<DonationCentreDaysOfWork>;
+    /**
+     * Closure reason
+     * @type {string}
+     * @memberof DonationCenterOperationsInfo
+     */
+    'closureReason'?: string;
+    /**
+     * Indicates if the donation center is closed
+     * @type {boolean}
+     * @memberof DonationCenterOperationsInfo
+     */
+    'isClosed'?: boolean;
+    /**
+     * Indicates if a new appointment requires action accept/decline to continue
+     * @type {boolean}
+     * @memberof DonationCenterOperationsInfo
+     */
+    'newAppointmentRequiresAction'?: boolean;
+    /**
+     * Indicates if the donation center is accepting appointments
+     * @type {boolean}
+     * @memberof DonationCenterOperationsInfo
+     */
+    'isAcceptingAppointments'?: boolean;
+    /**
+     * Indicates if the donation center appointment notifications are enabled
+     * @type {boolean}
+     * @memberof DonationCenterOperationsInfo
+     */
+    'isAppointmentNotificationsEnabled'?: boolean;
+    /**
+     * Indicates the maximum number of appointments the donation center can accept per day
+     * @type {number}
+     * @memberof DonationCenterOperationsInfo
+     */
+    'maxAppointmentsPerDay'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface DonationCenterRatingsInfo
+ */
+export interface DonationCenterRatingsInfo {
+    /**
+     * Ratings
+     * @type {Array<DonorRatingInfo>}
+     * @memberof DonationCenterRatingsInfo
+     */
+    'ratings'?: Array<DonorRatingInfo>;
+    /**
+     * Average rating e.g 4.5
+     * @type {string}
+     * @memberof DonationCenterRatingsInfo
+     */
+    'averageRating'?: string;
+    /**
+     * Rating one e.g 4
+     * @type {string}
+     * @memberof DonationCenterRatingsInfo
+     */
+    'ratingOne'?: string;
+    /**
+     * Rating two e.g 56
+     * @type {string}
+     * @memberof DonationCenterRatingsInfo
+     */
+    'ratingTwo'?: string;
+    /**
+     * Rating three e.g 78
+     * @type {string}
+     * @memberof DonationCenterRatingsInfo
+     */
+    'ratingThree'?: string;
+    /**
+     * Rating four e.g 90
+     * @type {string}
+     * @memberof DonationCenterRatingsInfo
+     */
+    'ratingFour'?: string;
+    /**
+     * Rating five e.g 100
+     * @type {string}
+     * @memberof DonationCenterRatingsInfo
+     */
+    'ratingFive'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface DonationCentreDaysOfWork
+ */
+export interface DonationCentreDaysOfWork {
+    /**
+     * 
+     * @type {string}
+     * @memberof DonationCentreDaysOfWork
+     */
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DonationCentreDaysOfWork
+     */
+    'day'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DonationCentreDaysOfWork
+     */
+    'open'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DonationCentreDaysOfWork
+     */
+    'close'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DonationCentreDaysOfWork
+     */
+    'alwaysOpen'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DonationCentreDaysOfWork
+     */
+    'closed'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface DonorRatingInfo
+ */
+export interface DonorRatingInfo {
+    /**
+     * Rating ID (Auto generated)
+     * @type {string}
+     * @memberof DonorRatingInfo
+     */
+    'id'?: string;
+    /**
+     * Rating e.g 4
+     * @type {string}
+     * @memberof DonorRatingInfo
+     */
+    'rating'?: string;
+    /**
+     * Comment e.g This is a great donation center.
+     * @type {string}
+     * @memberof DonorRatingInfo
+     */
+    'comment'?: string;
+    /**
+     * Donor name e.g Tunde Omotayo
+     * @type {string}
+     * @memberof DonorRatingInfo
+     */
+    'donorName'?: string;
+    /**
+     * Donor profile picture e.g https://medexer.s3.amazonaws.com/avatars/avatar.png
+     * @type {string}
+     * @memberof DonorRatingInfo
+     */
+    'donorProfilePhoto'?: string;
+    /**
+     * Created at e.g 2024-11-10_T_11:29:22
+     * @type {string}
+     * @memberof DonorRatingInfo
+     */
+    'createdAt'?: string;
 }
 /**
  * 
@@ -424,6 +1219,249 @@ export interface GooglePlacePrediction {
      */
     'reference': string;
 }
+/**
+ * 
+ * @export
+ * @interface UpdateAppointmentStatusDTO
+ */
+export interface UpdateAppointmentStatusDTO {
+    /**
+     * Status of the appointment.
+     * @type {string}
+     * @memberof UpdateAppointmentStatusDTO
+     */
+    'status': UpdateAppointmentStatusDTOStatusEnum;
+    /**
+     * ID of the appointment.
+     * @type {string}
+     * @memberof UpdateAppointmentStatusDTO
+     */
+    'appointmentId': string;
+}
+
+export const UpdateAppointmentStatusDTOStatusEnum = {
+    Pending: 'pending',
+    Accepted: 'accepted',
+    Processing: 'processing',
+    Completed: 'completed',
+    Cancelled: 'cancelled',
+    Missed: 'missed',
+    NoShow: 'no_show',
+    Rejected: 'rejected',
+    Expired: 'expired'
+} as const;
+
+export type UpdateAppointmentStatusDTOStatusEnum = typeof UpdateAppointmentStatusDTOStatusEnum[keyof typeof UpdateAppointmentStatusDTOStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface UpdateBloodInventoryItemPriceDTO
+ */
+export interface UpdateBloodInventoryItemPriceDTO {
+    /**
+     * New price of the inventory item
+     * @type {string}
+     * @memberof UpdateBloodInventoryItemPriceDTO
+     */
+    'price': string;
+    /**
+     * Inventory item ID
+     * @type {string}
+     * @memberof UpdateBloodInventoryItemPriceDTO
+     */
+    'inventoryItemId': string;
+    /**
+     * Donation center ID
+     * @type {string}
+     * @memberof UpdateBloodInventoryItemPriceDTO
+     */
+    'donationCenterId': string;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateDonationCenterAccountProfileDTO
+ */
+export interface UpdateDonationCenterAccountProfileDTO {
+    /**
+     * First name of the donation center administrator
+     * @type {string}
+     * @memberof UpdateDonationCenterAccountProfileDTO
+     */
+    'firstName': string;
+    /**
+     * Last name of the donation center administrator
+     * @type {string}
+     * @memberof UpdateDonationCenterAccountProfileDTO
+     */
+    'lastName': string;
+    /**
+     * Email of the donation center administrator
+     * @type {string}
+     * @memberof UpdateDonationCenterAccountProfileDTO
+     */
+    'email': string;
+    /**
+     * Phone number of the donation center administrator
+     * @type {string}
+     * @memberof UpdateDonationCenterAccountProfileDTO
+     */
+    'phone': string;
+    /**
+     * Profile photo of the donation center administrator
+     * @type {string}
+     * @memberof UpdateDonationCenterAccountProfileDTO
+     */
+    'profilePhoto': string;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateDonationCenterOperationsConfigDTO
+ */
+export interface UpdateDonationCenterOperationsConfigDTO {
+    /**
+     * Whether the donation center is accepting appointments
+     * @type {boolean}
+     * @memberof UpdateDonationCenterOperationsConfigDTO
+     */
+    'isAcceptingAppointments': boolean;
+    /**
+     * Whether the donation center is accepting appointments
+     * @type {boolean}
+     * @memberof UpdateDonationCenterOperationsConfigDTO
+     */
+    'isAppointmentNotificationsEnabled': boolean;
+    /**
+     * Whether the donation center is accepting appointments
+     * @type {boolean}
+     * @memberof UpdateDonationCenterOperationsConfigDTO
+     */
+    'newAppointmentRequiresAction': boolean;
+    /**
+     * Maximum number of appointments per day
+     * @type {number}
+     * @memberof UpdateDonationCenterOperationsConfigDTO
+     */
+    'maxAppointmentsPerDay': number;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateDonationCenterProfileDTO
+ */
+export interface UpdateDonationCenterProfileDTO {
+    /**
+     * Name of the donation center
+     * @type {string}
+     * @memberof UpdateDonationCenterProfileDTO
+     */
+    'name': string;
+    /**
+     * Email of the donation center
+     * @type {string}
+     * @memberof UpdateDonationCenterProfileDTO
+     */
+    'email': string;
+    /**
+     * Phone number of the donation center
+     * @type {string}
+     * @memberof UpdateDonationCenterProfileDTO
+     */
+    'phone': string;
+    /**
+     * Cover photo of the donation center
+     * @type {string}
+     * @memberof UpdateDonationCenterProfileDTO
+     */
+    'coverPhoto': string;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateDonationCenterWorkingHoursConfigDTO
+ */
+export interface UpdateDonationCenterWorkingHoursConfigDTO {
+    /**
+     * Opening hours for each day
+     * @type {Array<DonationCentreDaysOfWork>}
+     * @memberof UpdateDonationCenterWorkingHoursConfigDTO
+     */
+    'daysOfWork': Array<DonationCentreDaysOfWork>;
+}
+/**
+ * 
+ * @export
+ * @interface UploadTestResultsDTO
+ */
+export interface UploadTestResultsDTO {
+    /**
+     * Genotype
+     * @type {string}
+     * @memberof UploadTestResultsDTO
+     */
+    'genotype': UploadTestResultsDTOGenotypeEnum;
+    /**
+     * Blood group
+     * @type {string}
+     * @memberof UploadTestResultsDTO
+     */
+    'bloodGroup': UploadTestResultsDTOBloodGroupEnum;
+    /**
+     * HIV1 status
+     * @type {boolean}
+     * @memberof UploadTestResultsDTO
+     */
+    'hiv1': boolean;
+    /**
+     * HIV2 status
+     * @type {boolean}
+     * @memberof UploadTestResultsDTO
+     */
+    'hiv2': boolean;
+    /**
+     * Hepatitis B status
+     * @type {boolean}
+     * @memberof UploadTestResultsDTO
+     */
+    'hepatitisB': boolean;
+    /**
+     * Hepatitis C status
+     * @type {boolean}
+     * @memberof UploadTestResultsDTO
+     */
+    'hepatitisC': boolean;
+    /**
+     * Syphilis status
+     * @type {boolean}
+     * @memberof UploadTestResultsDTO
+     */
+    'syphilis': boolean;
+}
+
+export const UploadTestResultsDTOGenotypeEnum = {
+    Aa: 'AA',
+    As: 'AS',
+    Ss: 'SS',
+    Ac: 'AC',
+    Sc: 'SC'
+} as const;
+
+export type UploadTestResultsDTOGenotypeEnum = typeof UploadTestResultsDTOGenotypeEnum[keyof typeof UploadTestResultsDTOGenotypeEnum];
+export const UploadTestResultsDTOBloodGroupEnum = {
+    A: 'A+',
+    A2: 'A-',
+    B: 'B+',
+    B2: 'B-',
+    Ab: 'AB+',
+    Ab2: 'AB-',
+    O: 'O+',
+    O2: 'O-'
+} as const;
+
+export type UploadTestResultsDTOBloodGroupEnum = typeof UploadTestResultsDTOBloodGroupEnum[keyof typeof UploadTestResultsDTOBloodGroupEnum];
+
 
 /**
  * AddressHelperApi - axios parameter creator
@@ -527,6 +1565,603 @@ export class AddressHelperApi extends BaseAPI {
      */
     public addressHelperControllerGetGooglePlaceAutocomplete(searchQuery: string, options?: RawAxiosRequestConfig) {
         return AddressHelperApiFp(this.configuration).addressHelperControllerGetGooglePlaceAutocomplete(searchQuery, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * AppointmentApi - axios parameter creator
+ * @export
+ */
+export const AppointmentApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {UpdateAppointmentStatusDTO} updateAppointmentStatusDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appointmentControllerUpdateAppointmentStatus: async (updateAppointmentStatusDTO: UpdateAppointmentStatusDTO, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'updateAppointmentStatusDTO' is not null or undefined
+            assertParamExists('appointmentControllerUpdateAppointmentStatus', 'updateAppointmentStatusDTO', updateAppointmentStatusDTO)
+            const localVarPath = `/v1/donation-center/appointments/update-status`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateAppointmentStatusDTO, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} appointmentId Appointment ID
+         * @param {UploadTestResultsDTO} uploadTestResultsDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appointmentControllerUploadTestResults: async (appointmentId: number, uploadTestResultsDTO: UploadTestResultsDTO, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'appointmentId' is not null or undefined
+            assertParamExists('appointmentControllerUploadTestResults', 'appointmentId', appointmentId)
+            // verify required parameter 'uploadTestResultsDTO' is not null or undefined
+            assertParamExists('appointmentControllerUploadTestResults', 'uploadTestResultsDTO', uploadTestResultsDTO)
+            const localVarPath = `/v1/donation-center/appointments/upload-test-results`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (appointmentId !== undefined) {
+                localVarQueryParameter['appointmentId'] = appointmentId;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(uploadTestResultsDTO, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AppointmentApi - functional programming interface
+ * @export
+ */
+export const AppointmentApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AppointmentApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {UpdateAppointmentStatusDTO} updateAppointmentStatusDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async appointmentControllerUpdateAppointmentStatus(updateAppointmentStatusDTO: UpdateAppointmentStatusDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DonationCenterAppointmentInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.appointmentControllerUpdateAppointmentStatus(updateAppointmentStatusDTO, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AppointmentApi.appointmentControllerUpdateAppointmentStatus']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} appointmentId Appointment ID
+         * @param {UploadTestResultsDTO} uploadTestResultsDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async appointmentControllerUploadTestResults(appointmentId: number, uploadTestResultsDTO: UploadTestResultsDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DonationCenterAppointmentInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.appointmentControllerUploadTestResults(appointmentId, uploadTestResultsDTO, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AppointmentApi.appointmentControllerUploadTestResults']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AppointmentApi - factory interface
+ * @export
+ */
+export const AppointmentApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AppointmentApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {UpdateAppointmentStatusDTO} updateAppointmentStatusDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appointmentControllerUpdateAppointmentStatus(updateAppointmentStatusDTO: UpdateAppointmentStatusDTO, options?: RawAxiosRequestConfig): AxiosPromise<DonationCenterAppointmentInfo> {
+            return localVarFp.appointmentControllerUpdateAppointmentStatus(updateAppointmentStatusDTO, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} appointmentId Appointment ID
+         * @param {UploadTestResultsDTO} uploadTestResultsDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appointmentControllerUploadTestResults(appointmentId: number, uploadTestResultsDTO: UploadTestResultsDTO, options?: RawAxiosRequestConfig): AxiosPromise<DonationCenterAppointmentInfo> {
+            return localVarFp.appointmentControllerUploadTestResults(appointmentId, uploadTestResultsDTO, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AppointmentApi - object-oriented interface
+ * @export
+ * @class AppointmentApi
+ * @extends {BaseAPI}
+ */
+export class AppointmentApi extends BaseAPI {
+    /**
+     * 
+     * @param {UpdateAppointmentStatusDTO} updateAppointmentStatusDTO 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AppointmentApi
+     */
+    public appointmentControllerUpdateAppointmentStatus(updateAppointmentStatusDTO: UpdateAppointmentStatusDTO, options?: RawAxiosRequestConfig) {
+        return AppointmentApiFp(this.configuration).appointmentControllerUpdateAppointmentStatus(updateAppointmentStatusDTO, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} appointmentId Appointment ID
+     * @param {UploadTestResultsDTO} uploadTestResultsDTO 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AppointmentApi
+     */
+    public appointmentControllerUploadTestResults(appointmentId: number, uploadTestResultsDTO: UploadTestResultsDTO, options?: RawAxiosRequestConfig) {
+        return AppointmentApiFp(this.configuration).appointmentControllerUploadTestResults(appointmentId, uploadTestResultsDTO, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * AppointmentsApi - axios parameter creator
+ * @export
+ */
+export const AppointmentsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appointmentControllerGetCompletedAppointments: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/donation-center/appointments/completed-appointments`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appointmentControllerGetPendingAppointments: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/donation-center/appointments/pending-appointments`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AppointmentsApi - functional programming interface
+ * @export
+ */
+export const AppointmentsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AppointmentsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async appointmentControllerGetCompletedAppointments(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<DonationCenterAppointmentInfo>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.appointmentControllerGetCompletedAppointments(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AppointmentsApi.appointmentControllerGetCompletedAppointments']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async appointmentControllerGetPendingAppointments(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<DonationCenterAppointmentInfo>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.appointmentControllerGetPendingAppointments(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AppointmentsApi.appointmentControllerGetPendingAppointments']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AppointmentsApi - factory interface
+ * @export
+ */
+export const AppointmentsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AppointmentsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appointmentControllerGetCompletedAppointments(options?: RawAxiosRequestConfig): AxiosPromise<Array<DonationCenterAppointmentInfo>> {
+            return localVarFp.appointmentControllerGetCompletedAppointments(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appointmentControllerGetPendingAppointments(options?: RawAxiosRequestConfig): AxiosPromise<Array<DonationCenterAppointmentInfo>> {
+            return localVarFp.appointmentControllerGetPendingAppointments(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AppointmentsApi - object-oriented interface
+ * @export
+ * @class AppointmentsApi
+ * @extends {BaseAPI}
+ */
+export class AppointmentsApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AppointmentsApi
+     */
+    public appointmentControllerGetCompletedAppointments(options?: RawAxiosRequestConfig) {
+        return AppointmentsApiFp(this.configuration).appointmentControllerGetCompletedAppointments(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AppointmentsApi
+     */
+    public appointmentControllerGetPendingAppointments(options?: RawAxiosRequestConfig) {
+        return AppointmentsApiFp(this.configuration).appointmentControllerGetPendingAppointments(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * BloodInventoryApi - axios parameter creator
+ * @export
+ */
+export const BloodInventoryApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {AddDispenseBloodInventoryItemDTO} addDispenseBloodInventoryItemDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bloodInventoryControllerAddBloodInventoryItem: async (addDispenseBloodInventoryItemDTO: AddDispenseBloodInventoryItemDTO, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'addDispenseBloodInventoryItemDTO' is not null or undefined
+            assertParamExists('bloodInventoryControllerAddBloodInventoryItem', 'addDispenseBloodInventoryItemDTO', addDispenseBloodInventoryItemDTO)
+            const localVarPath = `/v1/donation-center/blood-inventory/add-dispense-item`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(addDispenseBloodInventoryItemDTO, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bloodInventoryControllerGetBloodInventory: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/donation-center/blood-inventory`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {UpdateBloodInventoryItemPriceDTO} updateBloodInventoryItemPriceDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bloodInventoryControllerUpdateBloodInventoryItemPrice: async (updateBloodInventoryItemPriceDTO: UpdateBloodInventoryItemPriceDTO, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'updateBloodInventoryItemPriceDTO' is not null or undefined
+            assertParamExists('bloodInventoryControllerUpdateBloodInventoryItemPrice', 'updateBloodInventoryItemPriceDTO', updateBloodInventoryItemPriceDTO)
+            const localVarPath = `/v1/donation-center/blood-inventory/update-item-price`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateBloodInventoryItemPriceDTO, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * BloodInventoryApi - functional programming interface
+ * @export
+ */
+export const BloodInventoryApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = BloodInventoryApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {AddDispenseBloodInventoryItemDTO} addDispenseBloodInventoryItemDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bloodInventoryControllerAddBloodInventoryItem(addDispenseBloodInventoryItemDTO: AddDispenseBloodInventoryItemDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BloodInventoryInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bloodInventoryControllerAddBloodInventoryItem(addDispenseBloodInventoryItemDTO, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BloodInventoryApi.bloodInventoryControllerAddBloodInventoryItem']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bloodInventoryControllerGetBloodInventory(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BloodInventoryInfo>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bloodInventoryControllerGetBloodInventory(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BloodInventoryApi.bloodInventoryControllerGetBloodInventory']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {UpdateBloodInventoryItemPriceDTO} updateBloodInventoryItemPriceDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bloodInventoryControllerUpdateBloodInventoryItemPrice(updateBloodInventoryItemPriceDTO: UpdateBloodInventoryItemPriceDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BloodInventoryInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bloodInventoryControllerUpdateBloodInventoryItemPrice(updateBloodInventoryItemPriceDTO, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BloodInventoryApi.bloodInventoryControllerUpdateBloodInventoryItemPrice']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * BloodInventoryApi - factory interface
+ * @export
+ */
+export const BloodInventoryApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = BloodInventoryApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {AddDispenseBloodInventoryItemDTO} addDispenseBloodInventoryItemDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bloodInventoryControllerAddBloodInventoryItem(addDispenseBloodInventoryItemDTO: AddDispenseBloodInventoryItemDTO, options?: RawAxiosRequestConfig): AxiosPromise<BloodInventoryInfo> {
+            return localVarFp.bloodInventoryControllerAddBloodInventoryItem(addDispenseBloodInventoryItemDTO, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bloodInventoryControllerGetBloodInventory(options?: RawAxiosRequestConfig): AxiosPromise<Array<BloodInventoryInfo>> {
+            return localVarFp.bloodInventoryControllerGetBloodInventory(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {UpdateBloodInventoryItemPriceDTO} updateBloodInventoryItemPriceDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bloodInventoryControllerUpdateBloodInventoryItemPrice(updateBloodInventoryItemPriceDTO: UpdateBloodInventoryItemPriceDTO, options?: RawAxiosRequestConfig): AxiosPromise<BloodInventoryInfo> {
+            return localVarFp.bloodInventoryControllerUpdateBloodInventoryItemPrice(updateBloodInventoryItemPriceDTO, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * BloodInventoryApi - object-oriented interface
+ * @export
+ * @class BloodInventoryApi
+ * @extends {BaseAPI}
+ */
+export class BloodInventoryApi extends BaseAPI {
+    /**
+     * 
+     * @param {AddDispenseBloodInventoryItemDTO} addDispenseBloodInventoryItemDTO 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BloodInventoryApi
+     */
+    public bloodInventoryControllerAddBloodInventoryItem(addDispenseBloodInventoryItemDTO: AddDispenseBloodInventoryItemDTO, options?: RawAxiosRequestConfig) {
+        return BloodInventoryApiFp(this.configuration).bloodInventoryControllerAddBloodInventoryItem(addDispenseBloodInventoryItemDTO, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BloodInventoryApi
+     */
+    public bloodInventoryControllerGetBloodInventory(options?: RawAxiosRequestConfig) {
+        return BloodInventoryApiFp(this.configuration).bloodInventoryControllerGetBloodInventory(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {UpdateBloodInventoryItemPriceDTO} updateBloodInventoryItemPriceDTO 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BloodInventoryApi
+     */
+    public bloodInventoryControllerUpdateBloodInventoryItemPrice(updateBloodInventoryItemPriceDTO: UpdateBloodInventoryItemPriceDTO, options?: RawAxiosRequestConfig) {
+        return BloodInventoryApiFp(this.configuration).bloodInventoryControllerUpdateBloodInventoryItemPrice(updateBloodInventoryItemPriceDTO, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -847,6 +2482,123 @@ export class ComplianceApi extends BaseAPI {
 
 
 /**
+ * DashboardApi - axios parameter creator
+ * @export
+ */
+export const DashboardApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} [startDate] Optional start date of the report period (YYYY-MM-DD)
+         * @param {string} [endDate] Optional end date of the report period (YYYY-MM-DD)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerGetDashboardData: async (startDate?: string, endDate?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/donation-center/dashboard`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (startDate !== undefined) {
+                localVarQueryParameter['startDate'] = startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['endDate'] = endDate;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * DashboardApi - functional programming interface
+ * @export
+ */
+export const DashboardApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = DashboardApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} [startDate] Optional start date of the report period (YYYY-MM-DD)
+         * @param {string} [endDate] Optional end date of the report period (YYYY-MM-DD)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async dashboardControllerGetDashboardData(startDate?: string, endDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DashboardInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.dashboardControllerGetDashboardData(startDate, endDate, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['DashboardApi.dashboardControllerGetDashboardData']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * DashboardApi - factory interface
+ * @export
+ */
+export const DashboardApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = DashboardApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} [startDate] Optional start date of the report period (YYYY-MM-DD)
+         * @param {string} [endDate] Optional end date of the report period (YYYY-MM-DD)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        dashboardControllerGetDashboardData(startDate?: string, endDate?: string, options?: RawAxiosRequestConfig): AxiosPromise<DashboardInfo> {
+            return localVarFp.dashboardControllerGetDashboardData(startDate, endDate, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * DashboardApi - object-oriented interface
+ * @export
+ * @class DashboardApi
+ * @extends {BaseAPI}
+ */
+export class DashboardApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} [startDate] Optional start date of the report period (YYYY-MM-DD)
+     * @param {string} [endDate] Optional end date of the report period (YYYY-MM-DD)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DashboardApi
+     */
+    public dashboardControllerGetDashboardData(startDate?: string, endDate?: string, options?: RawAxiosRequestConfig) {
+        return DashboardApiFp(this.configuration).dashboardControllerGetDashboardData(startDate, endDate, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
  * DonationCenterApi - axios parameter creator
  * @export
  */
@@ -942,6 +2694,561 @@ export class DonationCenterApi extends BaseAPI {
      */
     public donationCenterControllerGetDonationCenterProfile(options?: RawAxiosRequestConfig) {
         return DonationCenterApiFp(this.configuration).donationCenterControllerGetDonationCenterProfile(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * OperationsApi - axios parameter creator
+ * @export
+ */
+export const OperationsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {number} donationCenterId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        operationsControllerGetDonationCenterOperationsInfo: async (donationCenterId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'donationCenterId' is not null or undefined
+            assertParamExists('operationsControllerGetDonationCenterOperationsInfo', 'donationCenterId', donationCenterId)
+            const localVarPath = `/v1/donation-center/operations`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (donationCenterId !== undefined) {
+                localVarQueryParameter['donationCenterId'] = donationCenterId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} donationCenterId 
+         * @param {UpdateDonationCenterOperationsConfigDTO} updateDonationCenterOperationsConfigDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        operationsControllerUpdateDonationCenterOperationsConfig: async (donationCenterId: number, updateDonationCenterOperationsConfigDTO: UpdateDonationCenterOperationsConfigDTO, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'donationCenterId' is not null or undefined
+            assertParamExists('operationsControllerUpdateDonationCenterOperationsConfig', 'donationCenterId', donationCenterId)
+            // verify required parameter 'updateDonationCenterOperationsConfigDTO' is not null or undefined
+            assertParamExists('operationsControllerUpdateDonationCenterOperationsConfig', 'updateDonationCenterOperationsConfigDTO', updateDonationCenterOperationsConfigDTO)
+            const localVarPath = `/v1/donation-center/operations/update-config`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (donationCenterId !== undefined) {
+                localVarQueryParameter['donationCenterId'] = donationCenterId;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateDonationCenterOperationsConfigDTO, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} donationCenterId 
+         * @param {UpdateDonationCenterWorkingHoursConfigDTO} updateDonationCenterWorkingHoursConfigDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        operationsControllerUpdateDonationCenterWorkingHoursConfig: async (donationCenterId: number, updateDonationCenterWorkingHoursConfigDTO: UpdateDonationCenterWorkingHoursConfigDTO, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'donationCenterId' is not null or undefined
+            assertParamExists('operationsControllerUpdateDonationCenterWorkingHoursConfig', 'donationCenterId', donationCenterId)
+            // verify required parameter 'updateDonationCenterWorkingHoursConfigDTO' is not null or undefined
+            assertParamExists('operationsControllerUpdateDonationCenterWorkingHoursConfig', 'updateDonationCenterWorkingHoursConfigDTO', updateDonationCenterWorkingHoursConfigDTO)
+            const localVarPath = `/v1/donation-center/operations/working-hours`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (donationCenterId !== undefined) {
+                localVarQueryParameter['donationCenterId'] = donationCenterId;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateDonationCenterWorkingHoursConfigDTO, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * OperationsApi - functional programming interface
+ * @export
+ */
+export const OperationsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = OperationsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {number} donationCenterId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async operationsControllerGetDonationCenterOperationsInfo(donationCenterId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DonationCenterOperationsInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.operationsControllerGetDonationCenterOperationsInfo(donationCenterId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OperationsApi.operationsControllerGetDonationCenterOperationsInfo']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} donationCenterId 
+         * @param {UpdateDonationCenterOperationsConfigDTO} updateDonationCenterOperationsConfigDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async operationsControllerUpdateDonationCenterOperationsConfig(donationCenterId: number, updateDonationCenterOperationsConfigDTO: UpdateDonationCenterOperationsConfigDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DonationCenterOperationsInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.operationsControllerUpdateDonationCenterOperationsConfig(donationCenterId, updateDonationCenterOperationsConfigDTO, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OperationsApi.operationsControllerUpdateDonationCenterOperationsConfig']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} donationCenterId 
+         * @param {UpdateDonationCenterWorkingHoursConfigDTO} updateDonationCenterWorkingHoursConfigDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async operationsControllerUpdateDonationCenterWorkingHoursConfig(donationCenterId: number, updateDonationCenterWorkingHoursConfigDTO: UpdateDonationCenterWorkingHoursConfigDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DonationCenterOperationsInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.operationsControllerUpdateDonationCenterWorkingHoursConfig(donationCenterId, updateDonationCenterWorkingHoursConfigDTO, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OperationsApi.operationsControllerUpdateDonationCenterWorkingHoursConfig']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * OperationsApi - factory interface
+ * @export
+ */
+export const OperationsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = OperationsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {number} donationCenterId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        operationsControllerGetDonationCenterOperationsInfo(donationCenterId: number, options?: RawAxiosRequestConfig): AxiosPromise<DonationCenterOperationsInfo> {
+            return localVarFp.operationsControllerGetDonationCenterOperationsInfo(donationCenterId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} donationCenterId 
+         * @param {UpdateDonationCenterOperationsConfigDTO} updateDonationCenterOperationsConfigDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        operationsControllerUpdateDonationCenterOperationsConfig(donationCenterId: number, updateDonationCenterOperationsConfigDTO: UpdateDonationCenterOperationsConfigDTO, options?: RawAxiosRequestConfig): AxiosPromise<DonationCenterOperationsInfo> {
+            return localVarFp.operationsControllerUpdateDonationCenterOperationsConfig(donationCenterId, updateDonationCenterOperationsConfigDTO, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} donationCenterId 
+         * @param {UpdateDonationCenterWorkingHoursConfigDTO} updateDonationCenterWorkingHoursConfigDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        operationsControllerUpdateDonationCenterWorkingHoursConfig(donationCenterId: number, updateDonationCenterWorkingHoursConfigDTO: UpdateDonationCenterWorkingHoursConfigDTO, options?: RawAxiosRequestConfig): AxiosPromise<DonationCenterOperationsInfo> {
+            return localVarFp.operationsControllerUpdateDonationCenterWorkingHoursConfig(donationCenterId, updateDonationCenterWorkingHoursConfigDTO, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * OperationsApi - object-oriented interface
+ * @export
+ * @class OperationsApi
+ * @extends {BaseAPI}
+ */
+export class OperationsApi extends BaseAPI {
+    /**
+     * 
+     * @param {number} donationCenterId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OperationsApi
+     */
+    public operationsControllerGetDonationCenterOperationsInfo(donationCenterId: number, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).operationsControllerGetDonationCenterOperationsInfo(donationCenterId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} donationCenterId 
+     * @param {UpdateDonationCenterOperationsConfigDTO} updateDonationCenterOperationsConfigDTO 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OperationsApi
+     */
+    public operationsControllerUpdateDonationCenterOperationsConfig(donationCenterId: number, updateDonationCenterOperationsConfigDTO: UpdateDonationCenterOperationsConfigDTO, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).operationsControllerUpdateDonationCenterOperationsConfig(donationCenterId, updateDonationCenterOperationsConfigDTO, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} donationCenterId 
+     * @param {UpdateDonationCenterWorkingHoursConfigDTO} updateDonationCenterWorkingHoursConfigDTO 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OperationsApi
+     */
+    public operationsControllerUpdateDonationCenterWorkingHoursConfig(donationCenterId: number, updateDonationCenterWorkingHoursConfigDTO: UpdateDonationCenterWorkingHoursConfigDTO, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).operationsControllerUpdateDonationCenterWorkingHoursConfig(donationCenterId, updateDonationCenterWorkingHoursConfigDTO, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * ProfileApi - axios parameter creator
+ * @export
+ */
+export const ProfileApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {UpdateDonationCenterAccountProfileDTO} updateDonationCenterAccountProfileDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profileControllerUpdateDonationCenterAccountProfile: async (updateDonationCenterAccountProfileDTO: UpdateDonationCenterAccountProfileDTO, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'updateDonationCenterAccountProfileDTO' is not null or undefined
+            assertParamExists('profileControllerUpdateDonationCenterAccountProfile', 'updateDonationCenterAccountProfileDTO', updateDonationCenterAccountProfileDTO)
+            const localVarPath = `/v1/donation-center/profile/account`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateDonationCenterAccountProfileDTO, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {UpdateDonationCenterProfileDTO} updateDonationCenterProfileDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profileControllerUpdateDonationCenterProfile: async (updateDonationCenterProfileDTO: UpdateDonationCenterProfileDTO, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'updateDonationCenterProfileDTO' is not null or undefined
+            assertParamExists('profileControllerUpdateDonationCenterProfile', 'updateDonationCenterProfileDTO', updateDonationCenterProfileDTO)
+            const localVarPath = `/v1/donation-center/profile`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateDonationCenterProfileDTO, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * ProfileApi - functional programming interface
+ * @export
+ */
+export const ProfileApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ProfileApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {UpdateDonationCenterAccountProfileDTO} updateDonationCenterAccountProfileDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async profileControllerUpdateDonationCenterAccountProfile(updateDonationCenterAccountProfileDTO: UpdateDonationCenterAccountProfileDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.profileControllerUpdateDonationCenterAccountProfile(updateDonationCenterAccountProfileDTO, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProfileApi.profileControllerUpdateDonationCenterAccountProfile']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {UpdateDonationCenterProfileDTO} updateDonationCenterProfileDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async profileControllerUpdateDonationCenterProfile(updateDonationCenterProfileDTO: UpdateDonationCenterProfileDTO, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DonationCenterInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.profileControllerUpdateDonationCenterProfile(updateDonationCenterProfileDTO, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProfileApi.profileControllerUpdateDonationCenterProfile']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * ProfileApi - factory interface
+ * @export
+ */
+export const ProfileApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ProfileApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {UpdateDonationCenterAccountProfileDTO} updateDonationCenterAccountProfileDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profileControllerUpdateDonationCenterAccountProfile(updateDonationCenterAccountProfileDTO: UpdateDonationCenterAccountProfileDTO, options?: RawAxiosRequestConfig): AxiosPromise<AccountInfo> {
+            return localVarFp.profileControllerUpdateDonationCenterAccountProfile(updateDonationCenterAccountProfileDTO, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {UpdateDonationCenterProfileDTO} updateDonationCenterProfileDTO 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        profileControllerUpdateDonationCenterProfile(updateDonationCenterProfileDTO: UpdateDonationCenterProfileDTO, options?: RawAxiosRequestConfig): AxiosPromise<DonationCenterInfo> {
+            return localVarFp.profileControllerUpdateDonationCenterProfile(updateDonationCenterProfileDTO, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * ProfileApi - object-oriented interface
+ * @export
+ * @class ProfileApi
+ * @extends {BaseAPI}
+ */
+export class ProfileApi extends BaseAPI {
+    /**
+     * 
+     * @param {UpdateDonationCenterAccountProfileDTO} updateDonationCenterAccountProfileDTO 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProfileApi
+     */
+    public profileControllerUpdateDonationCenterAccountProfile(updateDonationCenterAccountProfileDTO: UpdateDonationCenterAccountProfileDTO, options?: RawAxiosRequestConfig) {
+        return ProfileApiFp(this.configuration).profileControllerUpdateDonationCenterAccountProfile(updateDonationCenterAccountProfileDTO, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {UpdateDonationCenterProfileDTO} updateDonationCenterProfileDTO 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProfileApi
+     */
+    public profileControllerUpdateDonationCenterProfile(updateDonationCenterProfileDTO: UpdateDonationCenterProfileDTO, options?: RawAxiosRequestConfig) {
+        return ProfileApiFp(this.configuration).profileControllerUpdateDonationCenterProfile(updateDonationCenterProfileDTO, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * RatingsApi - axios parameter creator
+ * @export
+ */
+export const RatingsApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        donationCenterControllerGetDonationCenterRatings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/donation-center/ratings`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * RatingsApi - functional programming interface
+ * @export
+ */
+export const RatingsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = RatingsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async donationCenterControllerGetDonationCenterRatings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DonationCenterRatingsInfo>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.donationCenterControllerGetDonationCenterRatings(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RatingsApi.donationCenterControllerGetDonationCenterRatings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * RatingsApi - factory interface
+ * @export
+ */
+export const RatingsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = RatingsApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        donationCenterControllerGetDonationCenterRatings(options?: RawAxiosRequestConfig): AxiosPromise<DonationCenterRatingsInfo> {
+            return localVarFp.donationCenterControllerGetDonationCenterRatings(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * RatingsApi - object-oriented interface
+ * @export
+ * @class RatingsApi
+ * @extends {BaseAPI}
+ */
+export class RatingsApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RatingsApi
+     */
+    public donationCenterControllerGetDonationCenterRatings(options?: RawAxiosRequestConfig) {
+        return RatingsApiFp(this.configuration).donationCenterControllerGetDonationCenterRatings(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

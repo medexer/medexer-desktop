@@ -178,8 +178,10 @@ const OnboardingCenterDetailsStepper = () => {
 					/>
 
 					<PhoneNumberInput
-						value={form.values.phone}
-						onChange={(value) => form.setFieldValue('phone', value)}
+						value={form.getValues().phone}
+						onChangeHandler={(value) =>
+							form.setFieldValue('phone', value)
+						}
 						countryCode={formValues.countryCode}
 						onCountryCodeChange={(code) =>
 							setFormValues({

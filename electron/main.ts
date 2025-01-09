@@ -44,8 +44,22 @@ function createWindow() {
 		),
 		webPreferences: {
 			preload: path.join(__dirname, 'preload.mjs'),
+			// devTools: false,
 		},
+		...(process.platform === 'darwin' && {
+			dockOptions: {
+				icon: path.join(__dirname, '..', 'public', 'medexer-logo.icns'),
+				iconSize: 32,
+			},
+		}),
 	});
+
+	// Prevent opening DevTools with keyboard shortcuts
+	// win.webContents.on('before-input-event', (event, input) => {
+	// 	if ((input.control || input.meta) && input.key.toLowerCase() === 'i') {
+	// 		event.preventDefault();
+	// 	}
+	// });
 
 	// Test active push message to Renderer-process.
 	win.webContents.on('did-finish-load', () => {

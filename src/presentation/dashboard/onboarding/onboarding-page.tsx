@@ -5,7 +5,8 @@ import OnboardingCenterDetailsStepper from './steppers/onboarding-center-details
 import OnboardingCenterAddressStepper from './steppers/onboarding-center-address-stepper';
 import OnboardingCenterCredentialsStepper from './steppers/onboarding-center-credentials-stepper';
 import OnboardingCompletedStepper from './steppers/onboarding-completed-stepper';
-import { useAppContext } from '@/core/context';
+import {useAppContext} from '@/core/context';
+import { useNavigate } from 'react-router-dom';
 
 interface OnboardingContextType {
 	step: number;
@@ -57,12 +58,23 @@ export default function OnboardingPage() {
 }
 
 function PageRoot() {
+	const navigate = useNavigate();
 	const {step, setStep} = useContext(OnboardingContext);
 	const {donationCenterComplianceDetails} = useAppContext();
 
 	useEffect(() => {
-		if (!donationCenterComplianceDetails?.isComplianceApproved) {
-			setStep(3)
+		if (
+			donationCenterComplianceDetails?.isComplianceUploaded &&
+			donationCenterComplianceDetails?.isComplianceApproved
+		) {
+			navigate('/appointments');
+		} else if (
+			donationCenterComplianceDetails?.isComplianceUploaded &&
+			!donationCenterComplianceDetails?.isComplianceApproved
+		) {
+			setStep(3);
+		} else {
+			setStep(0);
 		}
 	}, []);
 
