@@ -18,9 +18,9 @@ import { useAppContext } from '@/core/context';
   const InventoryCard: React.FC = () => {
     const { dashboardInfo } = useAppContext();
     const navigate = useNavigate();
-    const itemsInStock = dashboardInfo?.inventory.itemsInStock ?? 0;
-    const itemsOutOfStock = dashboardInfo?.inventory.itemsOutOfStock ?? 0;
-    const totalItems = dashboardInfo?.inventory.totalItems ?? 0;
+    const itemsInStock = dashboardInfo?.inventory?.itemsInStock ?? 0;
+    const itemsOutOfStock = dashboardInfo?.inventory?.itemsOutOfStock ?? 0;
+    const totalItems = dashboardInfo?.inventory?.totalItems ?? 0;
     const itemsInStockPercentage = totalItems > 0 ? (itemsInStock / totalItems) * 100 : 0;
     const itemsOutOfStockPercentage = totalItems > 0 ? (itemsOutOfStock / totalItems) * 100 : 0;
     return (

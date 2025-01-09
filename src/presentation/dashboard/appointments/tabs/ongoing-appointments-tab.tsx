@@ -150,6 +150,7 @@ const OngoingAppointmentsTab = () => {
 			<Box>
 				<RenderActiveAppointmentsSection
 					activeTab={activeTab}
+					isDashboardDisplay={false}
 					appointmentSections={appointmentSections}
 				/>
 				{activeTab &&

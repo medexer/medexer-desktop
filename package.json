@@ -5,13 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && electron-builder",
+    "build": "npm run build-mac && npm run build-win",
+    "build-mac": "tsc && vite build && electron-builder",
     "build-win": "electron-builder build --win --x64",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "create-sdk": "cd src/core/scripts && bash create-sdk.sh",
     "update-sdk": "cd src/core/scripts && bash update-sdk.sh"
   },
+  
   "dependencies": {
     "@mantine/charts": "^7.12.2",
     "@mantine/core": "^7.12.2",
@@ -27,6 +29,10 @@
     "@tanstack/react-query": "^5.50.1",
     "axios": "^1.7.2",
     "dayjs": "^1.11.12",
+    "electron-dl": "^4.0.0",
+    "electron-is-dev": "^3.0.1",
+    "electron-updater": "6.1.8",
+    "ffmpeg-static": "^5.2.0",
     "hugeicons-react": "^0.2.0",
     "iconutil": "^1.0.2",
     "react": "^18.2.0",
