@@ -1,24 +1,49 @@
-import { ipcRenderer, contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron';
+import { ElectronAppEvents, UpdateInfo, UpdateProgress, PrinterConfig } from './interfaces';
 
 // --------- Expose some API to the Renderer process ---------
-contextBridge.exposeInMainWorld('ipcRenderer', {
-  on(...args: Parameters<typeof ipcRenderer.on>) {
-    const [channel, listener] = args
-    return ipcRenderer.on(channel, (event, ...args) => listener(event, ...args))
+contextBridge.exposeInMainWorld('electron', {
+  // Window controls
+  minimizeWindow: () => ipcRenderer.send(ElectronAppEvents.MINIMIZE_WINDOW),
+  maximizeWindow: () => ipcRenderer.send(ElectronAppEvents.MAXIMIZE_WINDOW),
+  setWindowXYAxis: (x: number, y: number) => {
+    // Ensure we send valid numbers only
+    if (typeof x === 'number' && !isNaN(x) && typeof y === 'number' && !isNaN(y)) {
+      ipcRenderer.send(ElectronAppEvents.WINDOW_XY_AXIS, { x, y });
+    }
   },
-  off(...args: Parameters<typeof ipcRenderer.off>) {
-    const [channel, ...omit] = args
-    return ipcRenderer.off(channel, ...omit)
+  exitWindow: () => ipcRenderer.send(ElectronAppEvents.EXIT_WINDOW),
+  reloadWindow: () => ipcRenderer.send(ElectronAppEvents.RELOAD_WINDOW),
+  openDevTools: () => ipcRenderer.send(ElectronAppEvents.OPEN_DEV_TOOLS),
+
+  // App info
+  getVersion: () => ipcRenderer.invoke('app:get-version'),
+  getPath: (name: string) => ipcRenderer.invoke('app:get-path', name),
+
+  // Updates
+  checkForUpdates: () => ipcRenderer.invoke(ElectronAppEvents.CHECK_FOR_UPDATES),
+  startUpdate: () => ipcRenderer.invoke(ElectronAppEvents.START_UPDATE),
+  installUpdate: () => ipcRenderer.invoke(ElectronAppEvents.INSTALL_UPDATE),
+  onUpdateAvailable: (callback: (info: UpdateInfo) => void) => {
+    ipcRenderer.on('update:available', (_event, info) => callback(info));
   },
-  send(...args: Parameters<typeof ipcRenderer.send>) {
-    const [channel, ...omit] = args
-    return ipcRenderer.send(channel, ...omit)
+  onUpdateProgress: (callback: (progress: UpdateProgress) => void) => {
+    ipcRenderer.on('update:progress', (_event, progress) => callback(progress));
   },
-  invoke(...args: Parameters<typeof ipcRenderer.invoke>) {
-    const [channel, ...omit] = args
-    return ipcRenderer.invoke(channel, ...omit)
+  onUpdateDownloaded: (callback: (info: UpdateInfo) => void) => {
+    ipcRenderer.on('update:downloaded', (_event, info) => callback(info));
   },
 
-  // You can expose other APTs you need here.
-  // ...
-})
+  // Printer
+  printer: {
+    print: (data: any) => ipcRenderer.invoke(ElectronAppEvents.PRINTER_UTILS_USB_PRINT, data),
+    test: () => ipcRenderer.invoke(ElectronAppEvents.PRINTER_UTILS_USB_TEST),
+    onDeviceAttached: (callback: (config: PrinterConfig) => void) => {
+      ipcRenderer.on('printer_utils:attach-usb', (_event, config) => callback(config));
+    },
+    onDeviceDetached: (callback: () => void) => {
+      ipcRenderer.on('printer_utils:detach-usb', () => callback());
+    },
+  },
+});
+

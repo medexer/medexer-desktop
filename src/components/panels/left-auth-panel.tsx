@@ -3,7 +3,7 @@ import AuthImage01 from '../../assets/images/image_auth_1.jpg';
 
 const LeftAuthPanel = () => {
 	return (
-		<Container size='lg' style={{flex: 1, padding: 0}}>
+		<Container w={'50%'} size='lg' style={{flex: 1, padding: 0}}>
 			<Box
 				style={{
 					height: '100%',
