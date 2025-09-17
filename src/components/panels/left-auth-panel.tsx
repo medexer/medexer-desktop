@@ -50,7 +50,7 @@ const LeftAuthPanel = () => {
 					maw={400}
 					style={{position: 'relative', zIndex: 1}}
 				>
-					Connecting your business to a wider range of blood donors
+					Connecting your Hospital/Donation Center to a wider range of blood donors
 					through our platform.
 				</Text>
 			</Box>

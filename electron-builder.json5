@@ -21,6 +21,7 @@
   mac: {
 		target: ['dmg'],
 		icon: 'dist/logo.icns',
+    forceCodeSigning: false,
 		artifactName: '${productName}-Mac-${version}-Installer.${ext}',
 	},
   win: {

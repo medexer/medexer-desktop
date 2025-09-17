@@ -24,7 +24,6 @@
     "vitest:watch": "vitest",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
-    "rebuild:electron": "electron-rebuild -f -w @node-escpos/usb-adapter",
     "test": "yarn typecheck && yarn prettier && yarn lint && yarn vitest && yarn build"
   },
   "dependencies": {
@@ -92,7 +91,6 @@
     "cross-env": "^7.0.3",
     "electron": "26.1.0",
     "electron-builder": "24.6.4",
-    "electron-rebuild": "^3.2.9",
     "eslint": "^9.18.0",
     "eslint-config-mantine": "^4.0.3",
     "eslint-plugin-jsx-a11y": "^6.10.2",
