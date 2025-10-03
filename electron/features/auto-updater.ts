@@ -1,13 +1,18 @@
-import { autoUpdater } from 'electron-updater';
 import { BrowserWindow } from 'electron';
 import log from 'electron-log';
+import { autoUpdater } from 'electron-updater';
 
 export function setupAutoUpdater(window: BrowserWindow) {
   // Configure logging
   autoUpdater.logger = log;
   autoUpdater.autoDownload = false;
   autoUpdater.autoInstallOnAppQuit = true;
-  
+
+  // Skip auto-updater for Mac App Store builds
+  if (process.mas) {
+    log.info('Mac App Store build detected, skipping auto-updater');
+    return;
+  }
 
   // Check for updates
   const checkForUpdates = () => {
@@ -63,6 +68,4 @@ export function setupAutoUpdater(window: BrowserWindow) {
   window.webContents.ipc.handle('update:install', () => {
     autoUpdater.quitAndInstall();
   });
-
-
-} 
+}

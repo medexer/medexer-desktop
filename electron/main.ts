@@ -179,7 +179,7 @@ async function createWindow() {
       icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
       show: false,
       hasShadow: false,
-      darkTheme:false, 
+      darkTheme: false,
       autoHideMenuBar: true,
       webPreferences: {
         preload: path.join(__dirname, 'preload.js'),
@@ -329,6 +329,8 @@ app.on('ready', () => {
   log.info('App ready event (checking for updates).');
   if (!app.isPackaged) {
     log.warn('Skipping update check in development mode.');
+  } else if (process.mas) {
+    log.info('Mac App Store build detected, skipping auto-updater.');
   } else {
     autoUpdater.checkForUpdatesAndNotify();
   }

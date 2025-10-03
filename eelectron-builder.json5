@@ -1,0 +1,76 @@
+/**
+ * @see https://www.electron.build/configuration/configuration
+ */
+{
+  $schema: 'https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json',
+  appId: 'com.medexer.desktop',
+  extends: null,
+  asar: true,
+  productName: 'Medexer',
+  copyright: 'Copyright © 2025 Medexer',
+  directories: {
+    output: 'release/${version}',
+  },
+  extraMetadata: {
+    main: 'dist-electron/main.js',
+  },
+  files: ['dist', 'dist-electron'],
+  extraMetadata: {
+    main: 'dist-electron/main.js',
+  },
+  mac: {
+    target: [
+      {
+        target: 'dmg',
+        arch: ['x64', 'arm64'],
+      },
+      {
+        target: 'zip',
+        arch: ['x64', 'arm64'],
+      },
+    ],
+    icon: 'dist/logo.icns',
+    forceCodeSigning: true,
+    gatekeeperAssess: false,
+    hardenedRuntime: true,
+    entitlements: 'build/entitlements.mac.plist',
+    entitlementsInherit: 'build/entitlements.mac.inherit.plist',
+    identity: '0518527FB25214CF001637E621D21207D0B2F07A "Apple Development: Emmanuel Okposio (5VKW4698BH)"',
+    notarize: {
+      teamId: 'C2YPAB4FS4',
+    },
+    artifactName: '${productName}-Mac-${version}-Installer.${ext}',
+  },
+  mas: {
+    appId: 'com.medexer.desktop',
+    entitlements: 'build/entitlements.mas.plist',
+    entitlementsInherit: 'build/entitlements.mas.inherit.plist',
+    hardenedRuntime: false,
+    gatekeeperAssess: false,
+    category: 'public.app-category.medical',
+    identity: '0518527FB25214CF001637E621D21207D0B2F07A "Apple Development: Emmanuel Okposio (5VKW4698BH)"',
+    target: [
+      {
+        target: 'mas',
+        arch: ['x64', 'arm64'],
+      },
+    ],
+    artifactName: '${productName}-Mac-${version}-AppStore.${ext}',
+  },
+  win: {
+    icon: 'dist/logo.ico',
+    target: [
+      {
+        target: 'nsis',
+        arch: ['x64'],
+      },
+    ],
+    artifactName: '${productName}-Windows-${version}-Setup.${ext}',
+  },
+  nsis: {
+    oneClick: false,
+    perMachine: false,
+    allowToChangeInstallationDirectory: true,
+    deleteAppDataOnUninstall: false,
+  },
+}

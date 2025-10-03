@@ -1,16 +1,20 @@
 {
   "name": "medexer",
   "private": true,
-  "version": "1.0.4",
+  "version": "1.0.2",
   "description": "Medexer Desktop App for Medical Centers",
   "author": "Medexer",
   "main": "dist-electron/main.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "electron:publish": "electron-builder -p always",
-    "electron:build": "npm run build && electron-builder",
-    "build-win": "npm run build && electron-builder build --win --x64",
+    "electron:publish": "electron-builder -c electron-builder.json5 -p always",
+    "electron:build": "npm run build && electron-builder -c electron-builder.json5",
+    "build-win": "npm run build && electron-builder -c electron-builder.json5 --win --x64",
+    "build-mac": "npm run build && electron-builder -c electron-builder.json5 -m",
+    "build-mac-dev": "npm run build && electron-builder -c electron-builder.json5 -m -p never",
+    "build-mas": "npm run build && electron-builder -c electron-builder.json5 --mac mas --universal",
+    "build-mas-dev": "npm run build && electron-builder -c electron-builder.json5 --mac mas -p never",
     "create-sdk": "cd src/core/scripts && bash create-sdk.sh",
     "update-sdk": "cd src/core/scripts && bash update-sdk.sh",
     "preview": "vite preview",
@@ -24,7 +28,13 @@
     "vitest:watch": "vitest",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
-    "test": "yarn typecheck && yarn prettier && yarn lint && yarn vitest && yarn build"
+    "test": "yarn typecheck && yarn prettier && yarn lint && yarn vitest && yarn build",
+    "pack:mac": "node scripts/pack-mac.js",
+    "notarize:mac": "node scripts/notarize-mac.js",
+    "dist:mac": "npm run build && npm run pack:mac && npm run notarize:mac",
+    "package": "npm run build && electron-builder -c electron-builder.json5 -p never",
+    "package:publish": "npm run build && electron-builder -c electron-builder.json5 -p always",
+    "package:mac-unsigned": "npm run build && electron-builder build -c electron-builder.json5 -m -p never -c.mac.identity=null"
   },
   "dependencies": {
     "@fastify/static": "^8.1.1",
@@ -72,6 +82,8 @@
     "yarn": "^1.22.22"
   },
   "devDependencies": {
+    "@electron/notarize": "^3.1.0",
+    "@electron/osx-sign": "^1.3.3",
     "@eslint/js": "^9.18.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
     "@storybook/react": "^8.5.0",
@@ -91,6 +103,7 @@
     "cross-env": "^7.0.3",
     "electron": "26.1.0",
     "electron-builder": "24.6.4",
+    "electron-packager": "^17.1.2",
     "eslint": "^9.18.0",
     "eslint-config-mantine": "^4.0.3",
     "eslint-plugin-jsx-a11y": "^6.10.2",

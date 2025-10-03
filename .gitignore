@@ -25,3 +25,9 @@ dist-ssr
 
 .vscode
 release
+
+./afritint_p12.p12
+./package-mac-signed.sh
+
+.env
+./Medexer_Desktop_Provisioning_Profile.provisionprofile

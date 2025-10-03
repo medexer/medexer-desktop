@@ -1,43 +1,89 @@
 /**
- * @see https://www.electron.build/configuration/configuration
+ * Medexer electron-builder config
+ * MAS submission uses Apple Distribution + Mac App Store profile
+ * MAS Dev testing uses Apple Development + Mac App Store Development profile
  */
 {
   $schema: 'https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json',
-  appId: 'com.medexer.medexer',
-  extends: null,
-  asar: true,
+  
+  appId: 'com.medexer.desktop',
   productName: 'Medexer',
+  asar: true,
   copyright: 'Copyright © 2025 Medexer',
+
   directories: {
     output: 'release/${version}',
   },
+
   extraMetadata: {
     main: 'dist-electron/main.js',
   },
-  files: ['dist', 'dist-electron'],
-  extraMetadata: {
-    main: 'dist-electron/main.js',
-  },
+
+  files: ['dist/**', 'dist-electron/**', 'package.json'],
+
   mac: {
-		target: ['dmg'],
-		icon: 'dist/logo.icns',
-    forceCodeSigning: false,
-		artifactName: '${productName}-Mac-${version}-Installer.${ext}',
-	},
-  win: {
-    icon: 'dist/logo.ico',
+    // Explicitly disable electron-builder internal notarization; use afterSign script instead
+    // notarize: false,
+    notarize: true,
+    hardenedRuntime: true,
+    category: 'public.app-category.medical',
+    entitlements: 'build/entitlements.mac.plist',
+    entitlementsInherit: 'build/entitlements.mac.inherit.plist',
+
+    // Let electron-builder auto discover identities. Do not set cscName here.
     target: [
       {
-        target: 'nsis',
-        arch: ['x64'],
+        target: 'default',
+        arch: ['universal'],
       },
+      { target: 'dmg', arch: ['x64', 'arm64'] },
+      { target: 'zip', arch: ['x64', 'arm64'] },
+      { target: 'mas', arch: ['x64', 'arm64'] },
+      { target: 'mas-dev', arch: ['x64', 'arm64'] },
     ],
+    signIgnore: [
+      'Contents/Frameworks/Electron Framework.framework/Resources/.*\\.pak$',
+      'Contents/Frameworks/Electron Framework.framework/Resources/.*\\.dat$',
+    ],
+    icon: 'dist/logo.icns',
+    artifactName: '${productName}-mac-${version}-${arch}.${ext}',
+  },
+
+  // Mac App Store submission
+  mas: {
+    provisioningProfile: 'build/Medexer_Desktop_Provisioning_Profile.provisionprofile',
+    entitlements: 'build/entitlements.mas.plist',
+    entitlementsInherit: 'build/entitlements.mas.inherit.plist',
+    // If you use helper apps, keep the sandbox true in both plist files
+    // Do not set identity here; let auto discovery choose Apple Distribution
+  },
+
+  // Mac App Store local testing
+  // masDev: {
+  //  provisioningProfile: 'build/MacAppStoreDevelopment.provisionprofile',
+  //  entitlements: 'build/entitlements.mas.plist',
+  //  entitlementsInherit: 'build/entitlements.mas.inherit.plist',
+  // Auto discovery will pick Apple Development
+  // },
+
+  dmg: {
+    artifactName: '${productName}-mac-${version}-${arch}.${ext}',
+    sign: false,
+  },
+
+  win: {
+    target: [{ target: 'nsis', arch: ['x64'] }],
     artifactName: '${productName}-Windows-${version}-Setup.${ext}',
   },
+
   nsis: {
     oneClick: false,
     perMachine: false,
     allowToChangeInstallationDirectory: true,
     deleteAppDataOnUninstall: false,
   },
+
+  afterSign: 'scripts/notarize.js',
 }
+
+
